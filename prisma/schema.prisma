@@ -1,16 +1,10 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
   directUrl = env("DIRECT_URL")
 }
 
@@ -20,6 +14,7 @@ model User {
   email        String    @unique
   passwordHash String
   sessions     Session[]
+  tickets      Ticket[]
 }
 
 model Session {
@@ -31,7 +26,6 @@ model Session {
   @@index([userId])
 }
 
-
 model Ticket {
   id        String       @id @default(cuid())
   createdAt DateTime     @default(now())
@@ -39,8 +33,12 @@ model Ticket {
   title     String
   content   String       @db.VarChar(1024)
   status    TicketStatus @default(OPEN)
-  deadline String
-  bounty    Int 
+  deadline  String
+  bounty    Int
+  user      User         @relation(fields: [userId], references: [id])
+  userId    String
+
+  @@index([userId])
 }
 
 enum TicketStatus {
