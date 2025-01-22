@@ -34,13 +34,9 @@ export default function RootLayout({
       >
         <ThemeProvider>
           <Header />
-          <div
-            className="flex h-screen overflow-hidden border-collapse"
-            style={{ border: '2px solid tomato' }}
-          >
+          <div className="flex h-screen overflow-hidden border-collapse">
             <Sidebar />
             <main
-              style={{ border: '5px solid yellow' }}
               className="
                 min-h-screen flex-1
                 overflow-y-auto overflow-x-hidden
