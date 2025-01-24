@@ -1,25 +1,26 @@
-import './globals.css';
-import type { Metadata } from 'next';
-import localFont from 'next/font/local';
-import { Header } from '@/components/header';
-import { Sidebar } from '@/components/sidebar/components/sidebar';
-import { ThemeProvider } from '@/components/theme/theme-provider';
-import { Toaster } from '@/components/ui/sonner';
+import "./globals.css";
+import type { Metadata } from "next";
+import localFont from "next/font/local";
+import { Sidebar } from "@/app/_navigation/sidebar/components/sidebar";
+import { ThemeProvider } from "@/components/theme/theme-provider";
+import { Toaster } from "@/components/ui/sonner";
+import { Header } from "./_navigation/header";
+
 
 const geistSans = localFont({
-  src: './fonts/GeistVF.woff',
-  variable: '--font-geist-sans',
-  weight: '100 900',
+  src: "./fonts/GeistVF.woff",
+  variable: "--font-geist-sans",
+  weight: "100 900",
 });
 const geistMono = localFont({
-  src: './fonts/GeistMonoVF.woff',
-  variable: '--font-geist-mono',
-  weight: '100 900',
+  src: "./fonts/GeistMonoVF.woff",
+  variable: "--font-geist-mono",
+  weight: "100 900",
 });
 
 export const metadata: Metadata = {
-  title: 'The Road to Next',
-  description: 'My Road to Next application ...',
+  title: "The Road to Next",
+  description: "My Road to Next application ...",
 };
 
 export default function RootLayout({
