@@ -1,4 +1,8 @@
-import { createSearchParamsCache, parseAsString } from "nuqs/server";
+import {
+  createSearchParamsCache,
+  parseAsInteger,
+  parseAsString,
+} from "nuqs/server";
 
 //This is a single parser for the search parameter.
 //If the parameter is missing, it defaults to an empty string ("").
@@ -20,12 +24,23 @@ export const sortOptions = {
   clearOnDefault: true,
 };
 
+export const paginationParser = {
+  page: parseAsInteger.withDefault(0),
+  size: parseAsInteger.withDefault(2),
+};
+
+export const paginationOptions = {
+  shallow: false,
+  clearOnDefault: true,
+};
+
 //this combines all parser into single utility
 //It allows you to parse all the search parameters at once.
 //It caches the parsed results for efficiency
 export const searchParamsCache = createSearchParamsCache({
   search: searchParser,
   ...sortParser,
+  ...paginationParser,
 });
 
 export type ParsedSearchParams = Awaited<
