@@ -5,25 +5,45 @@ export const getTickets = async (
   userId: string | undefined,
   searchParams: ParsedSearchParams
 ) => {
-  return await prisma.ticket.findMany({
-    where: {
-      userId,
-      title: {
-        contains: searchParams.search,
-        mode: "insensitive",
+  const where = {
+    userId,
+    title: {
+      contains: searchParams.search,
+      mode: "insensitive" as const,
+    },
+  };
+
+  const skip = searchParams.size * searchParams.page;
+  const take = searchParams.size;
+
+  const [tickets, count] = await prisma.$transaction([
+    prisma.ticket.findMany({
+      where,
+      skip,
+      take,
+      orderBy: {
+        [searchParams.sortKey]: searchParams.sortValue,
       },
-    },
-    orderBy: {
-      [searchParams.sortKey]: searchParams.sortValue,
-    },
-    include: {
-      user: {
-        select: {
-          username: true,
+      include: {
+        user: {
+          select: {
+            username: true,
+          },
         },
       },
+    }),
+    prisma.ticket.count({
+      where,
+    }),
+  ]);
+
+  return {
+    list: tickets, // The actual tickets array
+    metadata: {
+      count, // Total number of tickets matching the query
+      hasNextPage: count > skip + take, // Boolean flag indicating if there are more pages
     },
-  });
+  };
 };
 
 //Files in the queries folder (like get-ticket.ts) that are only imported
