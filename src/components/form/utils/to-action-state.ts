@@ -14,6 +14,10 @@ export const EMPTY_ACTION_STATE: ActionState = {
   timestamp: Date.now(),
 };
 
+
+//Handles Zod validation errors (field-specific validation)
+//Handles standard JavaScript errors
+//Handles unknown errors
 export const fromErrorToActionState = (
   error: unknown,
   formData?: FormData
@@ -58,3 +62,11 @@ export const toActionState = (
     timestamp: Date.now(),
   };
 };
+
+
+//An ActionState is a structured object that represents the outcome of an action
+//It provides a consistent way to handle and communicate the result of an operation
+//(success, error, or other states) across the application.
+
+//This code implements a form handling and error management system, 
+// particularly useful in Next.js server actions.

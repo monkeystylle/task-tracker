@@ -28,6 +28,8 @@ const useConfirmDialog = ({
 }: UseConfirmDialogArgs) => {
   const [isOpen, setIsOpen] = useState(false);
 
+  // Clone the trigger element to add an onClick handler that toggles the dialog's open state.
+  // This allows the dialog to open and close when the trigger is clicked, without modifying the original element.
   const dialogTrigger = cloneElement(trigger, {
     onClick: () => setIsOpen(state => !state),
   });
