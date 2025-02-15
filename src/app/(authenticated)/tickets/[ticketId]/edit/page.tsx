@@ -1,12 +1,10 @@
-import { notFound } from 'next/navigation';
-import { Breadcrumbs } from '@/components/breadcrumbs';
-import { CardCompact } from '@/components/card-compact';
-import { Separator } from '@/components/ui/separator';
-import { getAuth } from '@/features/auth/queries/get-auth';
-import { isOwner } from '@/features/auth/utils/is-owner';
-import { TicketUpsertForm } from '@/features/ticket/components/ticket-upsert-form';
-import { getTicket } from '@/features/ticket/queries/get-ticket';
-import { homePath, ticketPath } from '@/paths';
+import { notFound } from "next/navigation";
+import { Breadcrumbs } from "@/components/breadcrumbs";
+import { CardCompact } from "@/components/card-compact";
+import { Separator } from "@/components/ui/separator";
+import { TicketUpsertForm } from "@/features/ticket/components/ticket-upsert-form";
+import { getTicket } from "@/features/ticket/queries/get-ticket";
+import { homePath, ticketPath } from "@/paths";
 
 type TicketEditPageProps = {
   params: Promise<{
@@ -15,14 +13,12 @@ type TicketEditPageProps = {
 };
 
 const TicketEditPage = async ({ params }: TicketEditPageProps) => {
-  const { user } = await getAuth();
   const { ticketId } = await params;
   const ticket = await getTicket(ticketId);
 
   const isTicketFound = !!ticket;
-  const isTicketOwner = isOwner(user, ticket);
 
-  if (!isTicketFound || !isTicketOwner) {
+  if (!isTicketFound || !ticket.isOwner) {
     notFound();
   }
 
@@ -30,9 +26,9 @@ const TicketEditPage = async ({ params }: TicketEditPageProps) => {
     <div className="flex-1 flex flex-col gap-y-8">
       <Breadcrumbs
         breadcrumbs={[
-          { title: 'Tickets', href: homePath() },
+          { title: "Tickets", href: homePath() },
           { title: ticket.title, href: ticketPath(ticket.id) },
-          { title: 'Edit' },
+          { title: "Edit" },
         ]}
       />
 
