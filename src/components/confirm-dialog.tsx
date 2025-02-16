@@ -1,4 +1,4 @@
-import { cloneElement, useActionState, useState } from 'react';
+import { cloneElement, useActionState, useState } from "react";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -8,36 +8,42 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from '@/components/ui/alert-dialog';
-import { Form } from './form/form';
-import { SubmitButton } from './form/submit-button';
-import { ActionState, EMPTY_ACTION_STATE } from './form/utils/to-action-state';
+} from "@/components/ui/alert-dialog";
+import { Form } from "./form/form";
+import { SubmitButton } from "./form/submit-button";
+import { ActionState, EMPTY_ACTION_STATE } from "./form/utils/to-action-state";
 
 type UseConfirmDialogArgs = {
   title?: string;
   description?: string;
   action: () => Promise<ActionState>;
   trigger: React.ReactElement;
+  onSuccess?: (actionState: ActionState) => void;
 };
 
+/**
+ * 
+ * this is a custom hook rather than a reusable component
+ * it returns a  UI , maybe thats why its place in components folder
+ */
 const useConfirmDialog = ({
-  title = 'Are you absolutely sure?',
-  description = 'This action cannot be undone. Make sure you understand the consequences.',
+  title = "Are you absolutely sure?",
+  description = "This action cannot be undone. Make sure you understand the consequences.",
   action,
   trigger,
+  onSuccess,
 }: UseConfirmDialogArgs) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  // Clone the trigger element to add an onClick handler that toggles the dialog's open state.
-  // This allows the dialog to open and close when the trigger is clicked, without modifying the original element.
   const dialogTrigger = cloneElement(trigger, {
-    onClick: () => setIsOpen(state => !state),
+    onClick: () => setIsOpen((state) => !state),
   });
 
   const [actionState, formAction] = useActionState(action, EMPTY_ACTION_STATE);
 
   const handleSuccess = () => {
     setIsOpen(false);
+    onSuccess?.(actionState);
   };
 
   const dialog = (

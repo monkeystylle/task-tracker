@@ -19,6 +19,9 @@ type TicketPaginationProps = {
 const TicketPagination = ({
   paginatedTicketMetadata,
 }: TicketPaginationProps) => {
+
+  //Uses nuqs to manage URL state
+  //Changes to pagination update the URL
   const [pagination, setPagination] = useQueryStates(
     paginationParser,
     paginationOptions
@@ -28,6 +31,7 @@ const TicketPagination = ({
   const prevSearch = useRef(search);
 
   useEffect(() => {
+    //Resets to first page when search changes
     if (search === prevSearch.current) return;
     prevSearch.current = search;
 

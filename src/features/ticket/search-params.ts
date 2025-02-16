@@ -24,11 +24,13 @@ export const sortOptions = {
   clearOnDefault: true,
 };
 
+//paginationParser: Defines the structure and default values
 export const paginationParser = {
   page: parseAsInteger.withDefault(0),
   size: parseAsInteger.withDefault(5),
 };
 
+//paginationOptions: Defines behavior
 export const paginationOptions = {
   shallow: false,
   clearOnDefault: true,
