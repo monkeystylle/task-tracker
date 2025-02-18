@@ -10,8 +10,9 @@ type UseActionFeedbackOptions = {
   onError?: (onArgs: OnArgs) => void;
 };
 
-//hook which monitors the actionState
 
+//The useActionFeedback custom hook monitors the action state 
+// and handles success/error scenarios:
  
 const useActionFeedback = (
   actionState: ActionState,
