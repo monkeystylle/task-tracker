@@ -3,23 +3,21 @@
 import { useQueryState, useQueryStates } from "nuqs";
 import { useEffect, useRef } from "react";
 import { Pagination } from "@/components/pagination";
+import { PaginatedData } from "@/types/pagination";
 import {
   paginationOptions,
   paginationParser,
   searchParser,
 } from "../search-params";
+import { TicketWithMetadata } from "../types";
 
 type TicketPaginationProps = {
-  paginatedTicketMetadata: {
-    count: number;
-    hasNextPage: boolean;
-  };
+  paginatedTicketMetadata: PaginatedData<TicketWithMetadata>["metadata"];
 };
 
 const TicketPagination = ({
   paginatedTicketMetadata,
 }: TicketPaginationProps) => {
-
   //Uses nuqs to manage URL state
   //Changes to pagination update the URL
   const [pagination, setPagination] = useQueryStates(
@@ -31,7 +29,6 @@ const TicketPagination = ({
   const prevSearch = useRef(search);
 
   useEffect(() => {
-    //Resets to first page when search changes
     if (search === prevSearch.current) return;
     prevSearch.current = search;
 
