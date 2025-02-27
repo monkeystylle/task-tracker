@@ -1,8 +1,10 @@
 "use client";
 
 import { useInfiniteQuery, useQueryClient } from "@tanstack/react-query";
+import { useEffect } from "react";
+import { useInView } from "react-intersection-observer";
 import { CardCompact } from "@/components/card-compact";
-import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
 import { PaginatedData } from "@/types/pagination";
 import { getComments } from "../queries/get-comments";
 import { CommentWithMetadata } from "../types";
@@ -38,13 +40,21 @@ const Comments = ({ ticketId, paginatedComments }: CommentsProps) => {
 
   const comments = data.pages.flatMap((page) => page.list);
 
-  const handleMore = () => fetchNextPage();
-
   const queryClient = useQueryClient();
 
   const handleDeleteComment = () => queryClient.invalidateQueries({ queryKey });
 
   const handleCreateComment = () => queryClient.invalidateQueries({ queryKey });
+
+  const { ref, inView } = useInView();
+
+  //if The element with the ref is visible in the viewport (inView is true)
+  //and There are more comments to load (hasNextPage is true) ..load more comment
+  useEffect(() => {
+    if (inView && hasNextPage && !isFetchingNextPage) {
+      fetchNextPage();
+    }
+  }, [fetchNextPage, hasNextPage, inView, isFetchingNextPage]);
 
   return (
     <>
@@ -76,17 +86,25 @@ const Comments = ({ ticketId, paginatedComments }: CommentsProps) => {
             ]}
           />
         ))}
-      </div>
 
-      <div className="flex flex-col justify-center ml-8">
-        {hasNextPage && (
-          <Button
-            variant="ghost"
-            onClick={handleMore}
-            disabled={isFetchingNextPage}
-          >
-            More
-          </Button>
+        {isFetchingNextPage && (
+          <>
+            <div className="flex gap-x-2">
+              <Skeleton className="h-[82px] w-full" />
+              <Skeleton className="h-[40px] w-[40px]" />
+            </div>
+            <div className="flex gap-x-2">
+              <Skeleton className="h-[82px] w-full" />
+              <Skeleton className="h-[40px] w-[40px]" />
+            </div>
+          </>
+        )}
+      </div>
+      
+      {/* This div acts as the "trigger" for loading more content when it becomes visible */}
+      <div ref={ref}>
+        {!hasNextPage && (
+          <p className="text-right text-xs italic">No more comments.</p>
         )}
       </div>
     </>
