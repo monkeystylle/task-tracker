@@ -1,12 +1,10 @@
-# TaskTracker Pro
+# TaskTracker
 
-A modern ticket management system built with Next.js, React Query, and Prisma.
-
-![TaskTracker Pro](https://img.shields.io/badge/Status-Portfolio%20Ready-brightgreen)
+A ticket management system built with Next.js 15
 
 ## 🚀 Overview
 
-TaskTracker Pro is a full-stack ticket management application that allows teams to create, track, and manage tasks efficiently. Built with the latest web technologies, this application demonstrates my expertise in modern React development, state management, and database integration.
+TaskTracker Pro is a full-stack ticket management application that allows teams to create, track, and manage tasks efficiently.
 
 **Note:** This application is currently optimized for desktop view only and is not yet responsive for mobile devices.
 
@@ -16,9 +14,9 @@ TaskTracker Pro is a full-stack ticket management application that allows teams 
 - **Ticket Management**: Create, view, edit, and delete tickets
 - **Status Tracking**: Track tickets with different statuses (Open, In Progress, Done)
 - **Comments System**: Add comments to tickets for better collaboration
-- **Search & Filter**: Find tickets quickly with powerful search and filtering options using [nuqs](https://www.npmjs.com/package/nuqs)
-- **Pagination**: Efficiently handle large numbers of tickets with nuqs pagination
-- **Sorting**: Sort tickets by various criteria using nuqs sorting capabilities
+- **Search & Filter**: Find tickets with search and filtering options using [nuqs](https://www.npmjs.com/package/nuqs)
+- **Pagination**: Efficiently handle large numbers of tickets pagination
+- **Sorting**: Sort tickets by various criteria using nuqs
 
 ## 🛠️ Tech Stack
 
@@ -34,18 +32,13 @@ TaskTracker Pro is a full-stack ticket management application that allows teams 
 - **Data Fetching & State Management**:
 
   - TanStack React Query
-  - Next.js Server Components
-  - Next.js Server Actions for mutations
+  - Next.js Server Actions
 
 - **Backend & Database**:
   - Next.js API Routes
   - Prisma ORM
   - Supabase (PostgreSQL) database
   - [Oslo](https://oslojs.dev/) authentication libraries (@oslojs/crypto, @oslojs/encoding)
-
-## 📸 Screenshots
-
-_[Add screenshots of your application here]_
 
 ## 🚀 Getting Started
 
@@ -114,26 +107,3 @@ yarn test
 This application can be easily deployed on Vercel:
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fyourusername%2Ftasktracker-pro)
-
-## 👨‍💻 About Me
-
-I'm a passionate React Developer with expertise in building modern web applications. This project showcases my skills in:
-
-- Building full-stack applications with Next.js
-- Implementing data fetching with Server Components and mutations with Server Actions
-- Creating clean, intuitive user interfaces with Shadcn UI and Tailwind
-- Working with databases through Prisma ORM and Supabase
-- Implementing URL-based state management with nuqs
-- Writing clean, maintainable TypeScript code
-
-## 📝 License
-
-This project is open source and available under the [MIT License](LICENSE).
-
-## 📞 Contact
-
-Feel free to reach out if you have any questions or would like to discuss job opportunities:
-
-- Email: your.email@example.com
-- LinkedIn: [Your LinkedIn Profile](https://linkedin.com/in/yourprofile)
-- GitHub: [Your GitHub Profile](https://github.com/yourusername)
