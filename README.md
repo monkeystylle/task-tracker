@@ -4,7 +4,7 @@ A ticket management system built with Next.js 15
 
 ## 🚀 Overview
 
-TaskTracker Pro is a full-stack ticket management application that allows teams to create, track, and manage tasks efficiently.
+TaskTracker is a full-stack ticket management application that allows teams to create, track, and manage tasks efficiently.
 
 **Note:** This application is currently optimized for desktop view only and is not yet responsive for mobile devices.
 
@@ -20,25 +20,41 @@ TaskTracker Pro is a full-stack ticket management application that allows teams 
 
 ## 🛠️ Tech Stack
 
-- **Frontend**:
+- **Core Framework**:
+  - Next.js 15
+  - React 19
+  - TypeScript
 
-  - Next.js 15 (App Router)
-  - React 19 (RC)
-  - Tailwind CSS for styling
-  - Shadcn UI components (built on top of Tailwind)
-  - TypeScript for type safety
-  - [nuqs](https://www.npmjs.com/package/nuqs) for URL-based state management
+- **UI & Styling**:
+  - Tailwind CSS
+  - Shadcn UI components
+  - next-themes (dark/light mode)
 
-- **Data Fetching & State Management**:
+- **State Management & Data Fetching**:
+  - TanStack React Query (data fetching)
+  - Next.js Server Actions (backend operations)
+  - nuqs (URL-based state management)
 
-  - TanStack React Query
-  - Next.js Server Actions
-
-- **Backend & Database**:
-  - Next.js API Routes
+- **Database & Authentication**:
   - Prisma ORM
-  - Supabase (PostgreSQL) database
-  - [Oslo](https://oslojs.dev/) authentication libraries (@oslojs/crypto, @oslojs/encoding)
+  - Supabase (PostgreSQL)
+  - Oslo authentication libraries (@oslojs/crypto, @oslojs/encoding)
+
+- **Utility Libraries**:
+  - zod (schema validation for form and API data)
+  - date-fns (date manipulation)
+  - big.js (precise number calculations)
+  - react-error-boundary (controlled error handling)
+  - react-intersection-observer (scroll detection)
+  - fastest-levenshtein (string similarity comparison)
+  - use-debounce (debouncing user input)
+
+### Key Architectural Decisions
+
+1. **Feature-Based Architecture**:
+   - The codebase is organized by features (e.g., `tickets`, `auth`, `comments`) rather than by type (e.g., `components`, `hooks`, `utils`).
+   - Each feature contains its own components, hooks, and utilities, making it easier to scale and maintain the application.
+    
 
 ## 🚀 Getting Started
 
