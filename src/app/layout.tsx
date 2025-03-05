@@ -47,6 +47,7 @@ export default function RootLayout({
                 py-24 px-8
                 bg-secondary/20
                 flex flex-col
+               
               "
                 >
                   {children}
