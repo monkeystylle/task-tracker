@@ -69,7 +69,7 @@ const config: Config = {
       animation: {
         'fade-from-top': 'fade-from-top 0.5s ease-out',
         'header-from-top': 'header-from-top 0.5s ease-out',
-        'sidebar-from-left': 'sidebar-from-left 0.5s ease-out',
+        'sidebar-from-left': 'sidebar-from-left 0.9s ease-in-out',
       },
       borderRadius: {
         lg: 'var(--radius)',
